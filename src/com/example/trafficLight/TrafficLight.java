@@ -2,8 +2,8 @@ package com.example.trafficLight;
 
 public class TrafficLight {
 
-    private LightColor light;
-    private boolean serviceModeOn;
+    private LightColor light = GreenLight.getInstance();
+    private boolean serviceModeOn = false;
 
     public LightColor getLight() {
         return light;

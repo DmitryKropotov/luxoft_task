@@ -1,6 +1,6 @@
 package com.example.trafficLight;
 
-public abstract class LightColor {
+public interface LightColor {
 
-    public abstract LightColor goNext();
+    void changeColor(TrafficLight trafficLight);
 }

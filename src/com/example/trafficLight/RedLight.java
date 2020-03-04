@@ -1,6 +1,6 @@
 package com.example.trafficLight;
 
-public class RedLight extends LightColor {
+public class RedLight implements LightColor {
 
     private static LightColor instance;
 
@@ -14,7 +14,13 @@ public class RedLight extends LightColor {
     }
 
     @Override
-    public LightColor goNext() {
-        return new YellowLight(this);
+    public void changeColor(TrafficLight trafficLight) {
+        System.out.println("goNext method in RedLight class");
+        trafficLight.setLight(new YellowLight(trafficLight.getLight()));
+    }
+
+    @Override
+    public String toString() {
+        return "Red light";
     }
 }
