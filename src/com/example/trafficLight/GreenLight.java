@@ -1,5 +1,8 @@
 package com.example.trafficLight;
 
+import lombok.extern.java.Log;
+
+@Log
 public class GreenLight implements LightColor {
 
     private static LightColor instance;
@@ -15,7 +18,7 @@ public class GreenLight implements LightColor {
 
     @Override
     public void changeColor(TrafficLight trafficLight) {
-       System.out.println("goNext method in GreenLight class");
+       log.info("goNext method in GreenLight class");
        trafficLight.setLight(new YellowLight(trafficLight.getLight()));
     }
 

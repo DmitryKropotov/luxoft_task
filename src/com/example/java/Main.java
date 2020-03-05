@@ -5,9 +5,11 @@ import com.example.trafficLight.LightColor;
 import com.example.trafficLight.RedLight;
 import com.example.trafficLight.TrafficLight;
 import com.example.trafficLight.YellowLight;
+import lombok.extern.java.Log;
 
 import java.util.Scanner;
 
+@Log
 public class Main {
 
     private static volatile TrafficLight trafficLight = new TrafficLight();
@@ -18,7 +20,7 @@ public class Main {
         Runnable trafficLightAlgorithm = () -> {
             while (true) {
                 if (!trafficLight.isServiceModeOn()) {
-                    System.out.println("changeServiceMode " + changeServiceMode);
+                    log.info("changeServiceMode " + changeServiceMode);
                 }
                 if (changeServiceMode) {
                     trafficLight.setServiceModeOn(!trafficLight.isServiceModeOn());
@@ -26,56 +28,62 @@ public class Main {
                         trafficLight.setLight(GreenLight.getInstance());
                     }
                     changeServiceMode = false;
-                    System.out.println("changeServiceMode has been switched off in the end of if before logic branches. trafficLight.getLight() is " + trafficLight.getLight());
+                    log.info("changeServiceMode has been switched off in the end of if before logic branches. trafficLight.getLight() is " + trafficLight.getLight());
                 }
                 if (!trafficLight.isServiceModeOn()) {
-                    System.out.println("changeServiceMode " + changeServiceMode);
+                    log.info("changeServiceMode " + changeServiceMode);
                 }
                 LightColor trafficLightColor = trafficLight.getLight();
                 if (trafficLightColor == GreenLight.getInstance()) {
-                    System.out.println("logic branch 1");
+                    log.info("logic branch 1");
+
                     try {
-                        System.out.println("30000 milliseconds are going to start");
+                        log.info("30000 milliseconds are going to start");
                         long time = System.currentTimeMillis();
                         Thread.sleep(30000);
-                        System.out.println((System.currentTimeMillis() - time) + " milliseconds passed by");
+                        log.info((System.currentTimeMillis() - time) + " milliseconds passed by");
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.warning("" + e);
                     }
-                    System.out.println("catch block is over. PedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
+                    log.info("catch block is over, PedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
+
                     while (!pedestrianButtonOn && !changeServiceMode){
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            log.warning("" + e);
                         }
                     }
-                    System.out.println("while loop is over. PedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
+                    log.info("while loop is over. PedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
                 } else if (trafficLightColor instanceof YellowLight && !trafficLight.isServiceModeOn()) {
-                    System.out.println("logic branch 2");
+                    log.info("logic branch 2");
+
                     try {
-                        System.out.println("2000 milliseconds are going to start");
+                        log.info("2000 milliseconds are going to start");
                         long time = System.currentTimeMillis();
                         Thread.sleep(2000);
-                        System.out.println((System.currentTimeMillis() - time) + " milliseconds passed by");
+                        log.info((System.currentTimeMillis() - time) + " milliseconds passed by");
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.warning("" + e);
                     }
+
                 } else if (trafficLightColor == RedLight.getInstance()) {
-                    System.out.println("logic branch 3");
+                    log.info("logic branch 3");
+
                     try {
-                        System.out.println("15000 milliseconds are going to start");
+                        log.info("15000 milliseconds are going to start");
                         long time = System.currentTimeMillis();
                         Thread.sleep(15000);
-                        System.out.println((System.currentTimeMillis() - time) + " milliseconds passed by");
+                        log.info((System.currentTimeMillis() - time) + " milliseconds passed by");
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.warning("" + e);
                     }
+
                     pedestrianButtonOn = false;
-                    System.out.println("pedestrianButtonOn has been switched off in logic branch 3");
+                    log.info("pedestrianButtonOn has been switched off in logic branch 3");
                 }
                 if (!trafficLight.isServiceModeOn()) {
-                    System.out.println("pedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
+                    log.info("pedestrianButtonOn " + pedestrianButtonOn + " changeServiceMode " + changeServiceMode);
                 }
                 if (trafficLightColor != null) {
                     trafficLightColor.changeColor(trafficLight);

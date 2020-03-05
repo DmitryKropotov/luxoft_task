@@ -1,21 +1,14 @@
 package com.example.trafficLight;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TrafficLight {
 
     private LightColor light = GreenLight.getInstance();
     private boolean serviceModeOn = false;
-
-    public LightColor getLight() {
-        return light;
-    }
-
-    public void setLight(LightColor light) {
-        this.light = light;
-    }
-
-    public boolean isServiceModeOn() {
-        return serviceModeOn;
-    }
 
     public void setServiceModeOn(boolean serviceModeOn) {
         if (serviceModeOn) {

@@ -1,25 +1,22 @@
 package com.example.trafficLight;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.java.Log;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Log
 public class YellowLight implements LightColor {
 
     private LightColor previousLightColor;
 
-    public YellowLight() {}
-
-    public YellowLight(LightColor previousLightColor) {
-        System.out.println("previousLightColor is set to " + previousLightColor + " in constructor of YellowLight");
-        this.previousLightColor = previousLightColor;
-    }
-
-    public void setPreviousLightColor(LightColor previousLightColor) {
-        System.out.println("previousLightColor is set to " + previousLightColor + " in setter of YellowLight");
-        this.previousLightColor = previousLightColor;
-    }
-
     @Override
     public void changeColor(TrafficLight trafficLight) {
         if (!(previousLightColor instanceof YellowLight)) {
-            System.out.println("goNext method in YellowLight class");
+            log.info("goNext method in YellowLight class. previousLightColor is set to " + previousLightColor + " in setter of YellowLight");
         }
        if (previousLightColor == GreenLight.getInstance()) {
            trafficLight.setLight(RedLight.getInstance());
